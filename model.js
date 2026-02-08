@@ -43,12 +43,13 @@ setInterval(() => {
   const diff = Math.abs(weightState - intentState);
 
   // build tension when diff exists; clear slowly when it doesn't
-  const build = (diff / 100) * BUILD_RATE;
-  tension += build;
-  tension -= CLEAR_RATE;
+const build = (diff / 100) * BUILD_RATE;
 
-  // tension cannot go below 0, and we cap it so visuals remain sane
-  tension = Math.max(0, Math.min(tension, 2.5));
+// Memory: tension fades by percentage, not by command
+tension *= 0.92;     // 8% fade per tick (adjust to taste)
+tension += build;
+
+tension = Math.max(0, Math.min(tension, 2.5));
 
   tensionEl.textContent = tension.toFixed(2);
 
