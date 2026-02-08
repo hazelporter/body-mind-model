@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weight / Intent / Tension</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>weight · intent · tension</h1>
+      <p class="sub">You can apply pressure. The system changes slowly.</p>
+    </header>
+
+    <section class="panel">
+      <div class="controls">
+        <label>
+          Weight (terrain)
+          <input id="weight" type="range" min="0" max="100" value="35" />
+        </label>
+
+        <label>
+          Intent (map)
+          <input id="intent" type="range" min="0" max="100" value="55" />
+        </label>
+      </div>
+
+      <div class="stage">
+        <div id="signal" aria-label="tension signal"></div>
+      </div>
+
+      <div class="readout">
+        <div>Tick: <span id="tick">0</span></div>
+        <div>Tension: <span id="tension">0.00</span></div>
+      </div>
+    </section>
+
+    <footer class="hint">
+      Tension thickens when weight and intent drift apart. It clears slowly.
+    </footer>
+  </main>
+
+  <script src="model.js"></script>
+</body>
+</html>
