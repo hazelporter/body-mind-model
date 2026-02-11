@@ -49,7 +49,7 @@ const build = (diff / 100) * BUILD_RATE;
 tension *= 0.92;     // 8% fade per tick (adjust to taste)
 tension += build;
 
-tension = Math.max(0, Math.min(tension, 2.5));
+tension = Math.max(0, Math.min(tension, 4.0));
 
   tensionEl.textContent = tension.toFixed(2);
 
@@ -62,6 +62,11 @@ const scale   = 0.85 + tension * 0.28;     // swell is readable
 // NEW: deformation — circle becomes “organic” as tension rises
 const squish = Math.min(45, Math.round(tension * 18)); // 0..45-ish
 signalEl.style.borderRadius = `${50 + squish}% ${50 - squish}% ${50 + squish}% ${50 - squish}% / ${50 - squish}% ${50 + squish}% ${50 - squish}% ${50 + squish}%`;
+// NEW: slow drift (reluctant movement)
+const drift = tension * 18; // pixels
+const dx = Math.sin(tick / 6) * drift;
+const dy = Math.cos(tick / 7) * drift;
+signalEl.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
 
 signalEl.style.opacity = String(Math.min(opacity, 0.9));
 signalEl.style.filter = `blur(${blurPx}px)`;
