@@ -53,18 +53,22 @@ label {
 
 input[type="range"] { width: 100%; }
 
-.stage {
-  height: 280px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  background:
-    radial-gradient(400px 220px at 50% 45%, rgba(255,255,255,0.07), transparent 65%),
-    linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  position: relative;
+#signal {
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: rgba(231,231,234,0.22);
+
+  /* NEW: give it a visible “stain” */
+  box-shadow: 0 0 120px 30px rgba(231,231,234,0.06);
+
+  filter: blur(10px);
+  opacity: 0.18;
+  transform: scale(0.9);
+
+  transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease, border-radius 1.2s ease;
 }
+
 
 /* The “blur thickening” signal */
 #signal {
