@@ -55,12 +55,16 @@ tension = Math.max(0, Math.min(tension, 2.5));
 
   // Convert tension into “blur thickening”
   // Higher tension => more opacity + more blur + subtle swell
-  const opacity = 0.18 + tension * 0.25;           // ~0.18..0.80
-  const blurPx = 12 + tension * 18;                // ~12..57
-  const scale = 1 + tension * 0.10;                // ~1..1.25
+ const opacity = 0.12 + tension * 0.35;     // bigger visual range
+const blurPx  = 8 + tension * 26;          // more obvious thickening
+const scale   = 0.85 + tension * 0.28;     // swell is readable
 
-  signalEl.style.opacity = String(Math.min(opacity, 0.85));
-  signalEl.style.filter = `blur(${blurPx}px)`;
-  signalEl.style.transform = `scale(${scale})`;
+// NEW: deformation — circle becomes “organic” as tension rises
+const squish = Math.min(45, Math.round(tension * 18)); // 0..45-ish
+signalEl.style.borderRadius = `${50 + squish}% ${50 - squish}% ${50 + squish}% ${50 - squish}% / ${50 - squish}% ${50 + squish}% ${50 - squish}% ${50 + squish}%`;
+
+signalEl.style.opacity = String(Math.min(opacity, 0.9));
+signalEl.style.filter = `blur(${blurPx}px)`;
+signalEl.style.transform = `scale(${scale})`;
 
 }, 5000);
