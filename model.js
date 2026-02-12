@@ -4,6 +4,8 @@ const signalEl = document.getElementById("signal");
 const tickEl = document.getElementById("tick");
 const tensionEl = document.getElementById("tension");
 
+const stage = document.querySelector(".stage");
+
 let tick = 0;
 
 // The user sets “pressure targets”
@@ -38,6 +40,10 @@ setInterval(() => {
   // terrain and map drift slowly toward what you “apply”
   weightState += (weightTarget - weightState) * ADAPT_RATE;
   intentState += (intentTarget - intentState) * ADAPT_RATE;
+
+  // darken stage as weight increases
+const weightDarken = weightState / 100;   // 0..1
+stage.style.backgroundColor = `rgba(0,0,0,${0.15 + weightDarken * 0.35})`;
 
   // difference (0..100)
   const diff = Math.abs(weightState - intentState);
